@@ -29,7 +29,8 @@ module.exports = {
     'space-before-function-paren' : 'off',
     'no-extra-semi' : 'off',
     'indent': 0,
-    "no-tabs":"off",
+    'no-tabs':'off',
+    'no-unused-vars': 0,// 可以定义不使用
     'no-mixed-spaces-and-tabs' : 'off',
     "no-unused-vars": [2, { 
         // 允许声明未使用变量
@@ -37,6 +38,8 @@ module.exports = {
         // 参数不检查
         "args": "none" 
     }],
+    'no-multiple-empty-lines': [1, {'max': 2}]//空行最多不能超过2行,
+    
     
   }
 }
