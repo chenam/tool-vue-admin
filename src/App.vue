@@ -9,6 +9,12 @@
                     class="el-menu-vertical-demo"
                     router
                 >
+                    <el-menu-item index="/">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-welcome"></use>
+                        </svg>
+                        <span slot="title">welcome</span>
+                    </el-menu-item>
                     <el-menu-item index="/tree">
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-tree"></use>
@@ -38,5 +44,9 @@ export default {
 <style>
 .app-header{
     line-height: 60px;
+    background: #F7F9F2;
+}
+.el-main{
+    padding : 0px;
 }
 </style>

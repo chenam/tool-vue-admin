@@ -41,6 +41,7 @@
 <style lang="less" scoped>
 @theme-color:#30AB63;
 .reader-wrapper{
+	margin :20px;
     width: 600px;
 	border :1px solid #ccc;
     margin-bottom: 20px;

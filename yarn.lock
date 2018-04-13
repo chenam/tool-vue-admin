@@ -6589,6 +6589,10 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^2.0.0"
     inherits "^2.0.1"
 
+roughjs@^2.1.1:
+  version "2.1.1"
+  resolved "http://registry.npm.taobao.org/roughjs/download/roughjs-2.1.1.tgz#bf15de81647d748c29bffe7123ed1df38a242a9e"
+
 run-async@^2.2.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/run-async/download/run-async-2.3.0.tgz#0371ab4ae0bdd720d4166d7dfda64ff7a445a6c0"

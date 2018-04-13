@@ -40,7 +40,7 @@
 </template>
 <style lang="less" scoped>
 .mulu-set-wrapper{
-    padding-bottom : 20px;
+    margin: 20px;
     margin-bottom: 20px;
     border :1px solid #ccc;
     .mulu-title{
