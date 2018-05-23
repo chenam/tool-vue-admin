@@ -13,7 +13,7 @@
                         <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-welcome"></use>
                         </svg>
-                        <span slot="title">welcome~</span>
+                        <span slot="title">welcome~~</span>
                     </el-menu-item>
                     <el-menu-item index="/tree">
                         <svg class="icon" aria-hidden="true">
