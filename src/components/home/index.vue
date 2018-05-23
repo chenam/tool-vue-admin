@@ -51,7 +51,7 @@ export default {
             Color({ h: 20, s: 100, l: 50 }),
             Color({ h: 200, l: 50 }),
             Color({ h: 300, l: 50 }),
-            Color({ h: 100, l: 40 }),
+            Color({ h: 100, l: 40 })
         ]
         const animationLoop = scope => {
         if (scope.animation) {
@@ -64,11 +64,11 @@ export default {
         scope.particles.map((p, i) => {
             p.pos.y -= p.speed
             if (i % 2) {
-            p.pos.x = p.pos.x + Math.sin(p.angle) * .2
+            p.pos.x = p.pos.x + Math.sin(p.angle) * 0.2
             } else {
-            p.pos.x = p.pos.x - Math.cos(p.angle) * .2
+            p.pos.x = p.pos.x - Math.cos(p.angle) * 0.2
             }
-            p.angle += .01
+            p.angle += 0.01
             rc.circle(p.pos.x, p.pos.y, p.radius, {
             fill: parseColor(p.color),
             roughness: Math.random() * 1.5,
@@ -79,8 +79,8 @@ export default {
             bowing: Math.random() * 3
             })
             if (p.pos.y + p.radius * 3 < 0) {
-            p.pos.y = canvas.height + p.radius * 3
-            p.pos.x = Math.random() * (canvas.width - p.radius)
+                p.pos.y = canvas.height + p.radius * 3
+                p.pos.x = Math.random() * (canvas.width - p.radius)
             }
         })
         }
@@ -102,7 +102,7 @@ export default {
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height
                 },
-                    speed: Math.random() + .2,
+                    speed: Math.random() + 0.2,
                     radius: Math.random() * 60 + 20,
                     color: colors[Math.floor(Math.random() * colors.length)],
                     hachureAngle: Math.random() * 90,
