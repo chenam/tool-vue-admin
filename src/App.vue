@@ -27,6 +27,12 @@
                         </svg>
                         <span slot="title">图片查看</span>
                     </el-menu-item>
+                    <el-menu-item index="/prize">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-choujiang"></use>
+                        </svg>
+                        <span slot="title">抽奖系列</span>
+                    </el-menu-item>
                 </el-menu>
             </el-aside>
             <el-main><router-view/></el-main>
