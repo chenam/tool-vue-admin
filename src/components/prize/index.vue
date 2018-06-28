@@ -1,9 +1,18 @@
 <template>
     <div class="banner">
         <div class="turnplate">
-            <canvas class="item" id="wheelcanvas" width="422px" height="422px">你的浏览器还不支持canvas</canvas>
+            <canvas 
+                class="item" 
+                id="wheelcanvas" 
+                width="422px" 
+                height="422px"
+                :style="{transform:rotate_angle,transition:rotate_transition}"
+            >你的浏览器还不支持canvas</canvas>
             <img class="pointer" src="../../assets/image/arrow.png"  v-on:click="pointer"/>
         </div>
+        <a href='https://blog.csdn.net/landl_ww/article/details/78467991'>参考链接1</a>
+        <a href='https://www.xiuyuan.info/?p=378'>参考链接2</a>
+        
     </div>
 </template>
 <style lang="less" scoped>
@@ -21,10 +30,11 @@
   .clear{clear:both;}
 
   /* 大转盘样式 */
-  .banner{display:block;width:40%;;margin-left:auto;margin-right:auto;margin-bottom: 20px; padding-top:120px;}
+  .banner{display:block;width:30%;;margin-left:auto;margin-right:auto;margin-bottom: 20px; padding-top:50px;}
   .banner .turnplate{display:block;width:100%;position:relative;}
   .banner .turnplate canvas.item{width:100%;}
   .banner .turnplate img.pointer{position:absolute;width:31.5%;height:42.5%;left:34.6%;top:23%;cursor: pointer}
+  .banner >a{text-align: center;display: block;}
 </style>
 <script>
 // import $ from 'jquery';
@@ -39,7 +49,7 @@ export default {
     data() {
         return ({
             rotateList: [
-                {value: '50M免费流量包', color: '#FFF4D6'},
+                {value: '70M免费流量包', color: '#FFF4D6'},
                 {value: '50M免费流量包', color: '#FFFFFF'},
                 {value: '10Q币', color: '#FFF4D6'},
                 {value: '谢谢参与', color: '#FFFFFF'},
@@ -55,7 +65,12 @@ export default {
             startAngle: 0,
             outsideRadius: 192,
             textRadius: 155,
-            insideRadius: 68
+            insideRadius: 68,
+            click_flag: true, //是否可以旋转抽奖，
+            start_rotating_degree: 0, //初始旋转角度，
+            rotate_angle_pointer: 0, //指针将要旋转的度数,
+            rotate_angle: 0, //将要旋转的角度,
+            rotate_transition: "transform 6s ease-in-out", //初始化选中的过度属性控制
         })
     },
     methods: {
@@ -82,11 +97,14 @@ export default {
                 this.rotateList.forEach((val, ind, arr) => {
                     var angle = self.startAngle + ind * arc;
                     ctx.fillStyle = val.color;
-                    ctx.beginPath();
+                    ctx.beginPath();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                     // arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）;
-                    // 规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
-                    ctx.arc(211, 211, self.outsideRadius, angle, angle + arc, false);
-                    ctx.arc(211, 211, self.insideRadius, angle + arc, angle, true)
+                    // 规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。默认顺时针
+                    // 0是从右侧水平线开始的
+                
+                    // console.log(angle,angle + arc,'angle')
+                    ctx.arc(211, 211, self.outsideRadius, angle  , angle + arc, false);
+                    ctx.arc(211, 211, self.insideRadius , angle + arc, angle, true)
                     ctx.stroke();
                     ctx.fill();
                     ctx.save();
@@ -96,7 +114,7 @@ export default {
                     var lineHeight = 17;
                     // translate方法重新映射画布上的 (0,0) 位置
                     ctx.translate(211 + Math.cos(angle + arc / 2) * self.textRadius, 211 + Math.sin(angle + arc / 2) * self.textRadius)
-
+                    // console.log(211 + Math.cos(angle + arc / 2) * self.textRadius, 211 + Math.sin(angle + arc / 2))
                     // rotate方法旋转当前的绘图
                     ctx.rotate(angle + arc / 2 + Math.PI / 2);
                     /** 下面代码根据奖品类型、奖品名称长度渲染不同效果，如字体、颜色、图片效果。(具体根据实际情况改变) **/
@@ -125,12 +143,48 @@ export default {
                     }
 
                     ctx.restore()
-                    // 绘制奖品结束
+                    //绘制奖品结束
                 })
             }
         },
         pointer() {
-
+            // 
+            this.rotating();
+        },
+        rotating(index) {
+            if (!this.click_flag) {
+                return;
+            };
+            // 可能旋转到的角度
+            let arcs = [];
+            
+            this.rotateList.forEach((val, ind, arr) => {
+                let _arcs = (2 * ind + 1) * 180 / arr.length;
+                arcs.push(_arcs); 
+            });
+            console.log(arcs);
+            var _random = Math.random();
+            var random = Math.ceil(_random * arcs.length) //随机下标
+            var result_index = index || random; // 最终要旋转到哪一块，对应prize_list的下标
+            var rand_circle = 6; // 附加多转几圈，6
+            var during_time = 5; // 默认为1s
+            this.click_flag = false; // 旋转结束前，不允许再次触发
+            
+            // 转动圆盘
+            var rotate_angle =
+            this.start_rotating_degree +
+            rand_circle * 360 -
+            arcs[result_index - 1] -
+            this.start_rotating_degree % 360 + 270; // 这里为计算旋转的角度，考虑第一次旋转后的结果
+            this.rotate_angle = "rotate(" + rotate_angle + "deg)";
+            // console.log(arcs,'ss')
+            // console.log(this.rotate_angle,result_index - 1,_random);
+            this.start_rotating_degree = rotate_angle;
+            setTimeout(() => {
+                alert(this.rotateList[result_index - 1].value);
+                this.click_flag = true;
+                // that.game_over(this.i);
+            }, during_time * 1000 + 1500); // 延时，保证转盘转完
         }
     }
 }
