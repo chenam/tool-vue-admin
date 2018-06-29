@@ -1,7 +1,6 @@
 
 <template>
 <div id='home'>
-    
     <h1>Welcome</h1>
 </div>
 
@@ -111,7 +110,6 @@ export default {
             }
         animationLoop(scope)
         })(scope)
-        
     },
     methods: {
     }

@@ -11,23 +11,27 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'welcome~~~',
+      component: Home,
+      icon: '#icon-welcome'
     },
     {
       path: '/tree',
-      name: 'tree',
-      component: Tree
+      name: '树操作',
+      component: Tree,
+      icon: '#icon-tree'
     },
     {
       path: '/img',
-      name: 'img',
-      component: Img
+      name: '图片查看',
+      component: Img,
+      icon: '#icon-img'
     },
     {
       path: '/prize',
-      name: 'prize',
-      component: Prize
+      name: '抽奖系列',
+      component: Prize,
+      icon: '#icon-choujiang'
     }
   ]
 })

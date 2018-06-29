@@ -233,12 +233,12 @@ export default{
 				};
 				var init2 = () => {
 					let shuiying = $('<span class="J_shuiyingText text red">amy</span>');
-					let img_w = $('.mImg').width();
-					let img_h = $('.mImg').height();
+					let imgW = $('.mImg').width();
+					let imgH = $('.mImg').height();
 					let arr = [];
 					// 255 85
-					let i = Math.ceil(img_w / 668);
-					let k = Math.ceil(img_h / 200);
+					let i = Math.ceil(imgW / 668);
+					let k = Math.ceil(imgH / 200);
 					for (let a = 0; a < i; a++) {
 						let mw = a * 700;
 						for (let b = 0; b < k; b++) {
@@ -252,7 +252,7 @@ export default{
 					let aaa = [];
 					for (let i = 0; i < 30; i++) {
 						let ran = +Math.round(Math.random() * arr.length + 0).toFixed(0);
-						if (aaa.length === 0){
+						if (aaa.length === 0) {
 							aaa.push(ran);
 						} else {
 							let type = true;
@@ -532,8 +532,8 @@ export default{
 				return;
 			}
 			// let img = $('.J_img');
-			let bw = this.imgWidth * 0.1;
-			let bh = this.imgHeight * 0.1;
+			// let bw = this.imgWidth * 0.1;
+			// let bh = this.imgHeight * 0.1;
 			// 向下滚
 			if (type < 0) {
 				if (this.bfb <= 10) {

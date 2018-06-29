@@ -3,9 +3,9 @@
         <div class="banner">
             <div class="wheel-main">
                 <div class="wheel-pointer-box">
-                     <div class="wheel-pointer" @click="rotate_handle()" :style="{transform:rotate_angle_pointer,transition:rotate_transition_pointer}"></div>
-                </div>               
-                <div class="wheel-bg" :style="{transform:rotate_angle,transition:rotate_transition}">                   
+                     <div class="wheel-pointer" @click="rotate_handle()" :style="{transform:rotateAngle_pointer,transition:rotate_transition_pointer}"></div>
+                </div>
+                <div class="wheel-bg" :style="{transform:rotateAngle,transition:rotate_transition}">
                     <div class="prize-list">
                         <div class="prize-item" v-for="(item,index) in rotateList" :key="index">
                             <div class="prize-pic">
@@ -23,9 +23,6 @@
             </div>
             <a href='https://blog.csdn.net/landl_ww/article/details/78467991' target="_blank">参考链接1</a>
         </div>
-        
-        
-        
     </div>
 </template>
 <style lang="less" scoped>
@@ -157,59 +154,53 @@ export default {
     },
     data() {
         return ({
-            liList: [
-                {value: 'canvas圆盘抽奖'},
-                {value: 'css圆盘抽奖'}
-            ],
-            activeLi: 0,
-            // 
             rotateList: [
                 {
-                    icon: require("../img/bean_500.png"), // 奖品图片
+                    icon: require('../img/bean_500.png'), // 奖品图片
                     count: 10, // 奖品数量
-                    value: "易趣豆", // 奖品名称
+                    value: '易趣豆', // 奖品名称
                     isPrize: 1 // 该奖项是否为奖品
                 },
                 {
-                    icon: require("../img/bean_five.png"),
+                    icon: require('../img/bean_five.png'),
                     count: 5,
-                    value: "豆",
+                    value: '豆',
                     isPrize: 1
                 },
                 {
-                    icon: require("../img/bean_one.png"),
+                    icon: require('../img/bean_one.png'),
                     count: 10,
-                    value: "易趣豆",
+                    value: '易趣豆',
                     isPrize: 1
                 },
                 {
-                    icon: require("../img/point_five.png"),
+                    icon: require('../img/point_five.png'),
                     count: 5,
-                    value: "积分",
+                    value: '积分',
                     isPrize: 1
                 },
                 {
-                    icon: require("../img/point_ten.png"),
+                    icon: require('../img/point_ten.png'),
                     count: 10,
-                    value: "积分",
+                    value: '积分',
                     isPrize: 1
                 },
                 {
-                    icon: require("../img/bean_500.png"),
+                    icon: require('../img/bean_500.png'),
                     count: 10,
-                    value: "易趣豆",
+                    value: '易趣豆',
                     isPrize: 1
                 },
                 {
-                    icon: require("../img/give_up.png"),
+                    icon: require('../img/give_up.png'),
                     count: 0,
-                    value: "未中奖",
+                    value: '未中奖',
                     isPrize: 0
                 },
                 {
-                    icon: require("../img/bean_500.png"),
+                    icon: require('../img/bean_500.png'),
                     count: 10,
-                    value: "易趣豆",
+                    value: '易趣豆',
                     isPrize: 1
                 }
             ],
@@ -217,63 +208,55 @@ export default {
             outsideRadius: 192,
             textRadius: 155,
             insideRadius: 68,
-            click_flag: true, //是否可以旋转抽奖，
-            start_rotating_degree: 0, //初始旋转角度，
-            rotate_angle_pointer: 0, //指针将要旋转的度数,
-            rotate_angle: 0, //将要旋转的角度,
-            rotate_transition: "transform 6s ease-in-out", //初始化选中的过度属性控制,
-            rotate_transition_pointer: "transform 12s ease-in-out", //初始化指针过度属性控制
+            clickFlag: true, // 是否可以旋转抽奖，
+            startRotatingDegree: 0, // 初始旋转角度，
+            rotateAngle_pointer: 0, // 指针将要旋转的度数,
+            rotateAngle: 0, // 将要旋转的角度,
+            rotate_transition: 'transform 6s ease-in-out', // 初始化选中的过度属性控制,
+            rotate_transition_pointer: 'transform 12s ease-in-out' // 初始化指针过度属性控制
         })
     },
     methods: {
-        liSwitch(item,index){
-            this.activeLi = index;
-        },
         rotate_handle() {
-            // 
             this.rotating();
         },
         rotating(index) {
-            if (!this.click_flag) {
+            if (!this.clickFlag) {
                 return;
             };
             // 可能旋转到的角度
             let arcs = [];
-            
             this.rotateList.forEach((val, ind, arr) => {
                 let _arcs = (2 * ind + 1) * 180 / arr.length;
-                arcs.push(_arcs); 
+                arcs.push(_arcs);
             });
             console.log(arcs);
             var _random = Math.random();
-            var random = Math.ceil(_random * arcs.length) //随机下标
-            var result_index = index || random; // 最终要旋转到哪一块，对应prize_list的下标
-            var rand_circle = 6; // 附加多转几圈，6
-            var during_time = 5; // 默认为1s
-            this.click_flag = false; // 旋转结束前，不允许再次触发
-            
+            var random = Math.ceil(_random * arcs.length) // 随机下标
+            var resultIndex = index || random; // 最终要旋转到哪一块，对应prize_list的下标
+            var randCircle = 6; // 附加多转几圈，6
+            var duringTime = 5; // 默认为1s
+            this.clickFlag = false; // 旋转结束前，不允许再次触发
             // 转动圆盘
-            var rotate_angle =
-            this.start_rotating_degree +
-            rand_circle * 360 -
-            arcs[result_index - 1] -
-            this.start_rotating_degree % 360 + 720; // 这里为计算旋转的角度，考虑第一次旋转后的结果
-            this.rotate_angle = "rotate(" + rotate_angle + "deg)";
-            console.log(arcs,'ss')
-
-            this.start_rotating_degree = rotate_angle;
-            console.log(this.rotate_angle,result_index - 1,_random);
+            var rotateAngle =
+            this.startRotatingDegree +
+            randCircle * 360 -
+            arcs[resultIndex - 1] -
+            this.startRotatingDegree % 360 + 720; // 这里为计算旋转的角度，考虑第一次旋转后的结果
+            this.rotateAngle = 'rotate(' + rotateAngle + 'deg)';
+            // console.log(arcs,'ss')
+            this.startRotatingDegree = rotateAngle;
+            // console.log(this.rotateAngle,resultIndex - 1,_random);
             setTimeout(() => {
-                let _item = this.rotateList[result_index - 1];
-                if(_item.isPrize){
+                let _item = this.rotateList[resultIndex - 1];
+                if (_item.isPrize) {
                     alert(_item.count + _item.value);
-                }else{
+                } else {
                     alert(_item.value);
                 }
-                
-                this.click_flag = true;
+                this.clickFlag = true;
                 // that.game_over(this.i);
-            }, during_time * 1000 + 1500); // 延时，保证转盘转完
+            }, duringTime * 1000 + 1500); // 延时，保证转盘转完
         }
     }
 }

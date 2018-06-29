@@ -2,7 +2,7 @@
     <div>
         <div class="bread">
             <ul>
-                <li 
+                <li
                     v-for="(item, index) in liList"
                     :class="{active : activeLi === index}"
                     :key="index"
@@ -61,7 +61,6 @@ export default {
                 {value: 'css圆盘抽奖'}
             ],
             activeLi: 0,
-            // 
             rotateList: [
                 {value: '70M免费流量包', color: '#FFF4D6'},
                 {value: '50M免费流量包', color: '#FFFFFF'},
@@ -79,7 +78,7 @@ export default {
         })
     },
     methods: {
-        liSwitch(item,index){
+        liSwitch(item, index) {
             this.activeLi = index;
         }
     }

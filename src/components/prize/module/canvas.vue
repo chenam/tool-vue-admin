@@ -2,21 +2,18 @@
     <div>
         <div class="banner">
             <div class="turnplate">
-                <canvas 
-                    class="item" 
-                    id="wheelcanvas" 
-                    width="422px" 
+                <canvas
+                    class="item"
+                    id="wheelcanvas"
+                    width="422px"
                     height="422px"
-                    :style="{transform:rotate_angle,transition:rotate_transition}"
+                    :style="{transform:rotateAngle,transition:rotate_transition}"
                 >你的浏览器还不支持canvas</canvas>
                 <img class="pointer" src="../../../assets/image/arrow.png"  v-on:click="pointer"/>
             </div>
-            
         </div>
-        
         <a href='https://blog.csdn.net/landl_ww/article/details/78467991' target="_blank">参考链接1</a>
         <a href='https://www.xiuyuan.info/?p=378' target="_blank">参考链接2</a>
-        
     </div>
 </template>
 <style lang="less" scoped>
@@ -36,7 +33,6 @@
   .banner .turnplate{display:block;width:100%;position:relative;}
   .banner .turnplate canvas.item{width:100%;}
   .banner .turnplate img.pointer{position:absolute;width:31.5%;height:42.5%;left:34.6%;top:23%;cursor: pointer}
-//   .banner >a{text-align: center;display: block;}
 </style>
 <script>
 // import $ from 'jquery';
@@ -50,12 +46,6 @@ export default {
     },
     data() {
         return ({
-            liList: [
-                {value: 'canvas圆盘抽奖'},
-                {value: 'css圆盘抽奖'}
-            ],
-            activeLi: 0,
-            // 
             rotateList: [
                 {value: '70M免费流量包', color: '#FFF4D6'},
                 {value: '50M免费流量包', color: '#FFFFFF'},
@@ -74,48 +64,38 @@ export default {
             outsideRadius: 192,
             textRadius: 155,
             insideRadius: 68,
-            click_flag: true, //是否可以旋转抽奖，
-            start_rotating_degree: 0, //初始旋转角度，
-            rotate_angle_pointer: 0, //指针将要旋转的度数,
-            rotate_angle: 0, //将要旋转的角度,
-            rotate_transition: "transform 6s ease-in-out", //初始化选中的过度属性控制
+            click_flag: true, // 是否可以旋转抽奖，
+            startRotatingDegree: 0, // 初始旋转角度，
+            rotateAngle_pointer: 0, // 指针将要旋转的度数,
+            rotateAngle: 0, // 将要旋转的角度,
+            rotate_transition: 'transform 6s ease-in-out' // 初始化选中的过度属性控制
         })
     },
     methods: {
-        liSwitch(item,index){
+        liSwitch (item, index) {
             this.activeLi = index;
         },
-        drawRouletteWheel() {
+        drawRouletteWheel () {
             const self = this;
             var canvas = document.getElementById('wheelcanvas');
             if (canvas.getContext) {
                 // 根据奖品个数计算圆周角度
                 var arc = Math.PI / (this.rotateList.length / 2);
                 var ctx = canvas.getContext('2d')
-                // //设置对象起始点和终点
-                // ctx.moveTo(10,10);
-                // ctx.lineTo(200,200);
-                // //设置样式
-                // ctx.lineWidth = 2;
-                // ctx.strokeStyle = "#F5270B";
-                // //绘制
-                // ctx.stroke();
                 // 在给定矩形内清空一个矩形
                 ctx.clearRect(0, 0, 422, 422)
-
                 ctx.strokeStyle = '#FFBE04'
                 ctx.font = '16px Microsoft YaHei'
                 this.rotateList.forEach((val, ind, arr) => {
                     var angle = self.startAngle + ind * arc;
                     ctx.fillStyle = val.color;
-                    ctx.beginPath();                                                                                                                              
+                    ctx.beginPath();
                     // arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）;
                     // 规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。默认顺时针
                     // 0是从右侧水平线开始的
-                
                     // console.log(angle,angle + arc,'angle')
-                    ctx.arc(211, 211, self.outsideRadius, angle  , angle + arc, false);
-                    ctx.arc(211, 211, self.insideRadius , angle + arc, angle, true)
+                    ctx.arc(211, 211, self.outsideRadius, angle, angle + arc, false);
+                    ctx.arc(211, 211, self.insideRadius, angle + arc, angle, true)
                     ctx.stroke();
                     ctx.fill();
                     ctx.save();
@@ -152,14 +132,12 @@ export default {
                         // measureText()方法返回包含一个对象，该对象包含以像素计的指定字体宽度
                         ctx.fillText(text, -ctx.measureText(text).width / 2, 0)
                     }
-
                     ctx.restore()
-                    //绘制奖品结束
+                    // 绘制奖品结束
                 })
             }
         },
         pointer() {
-            // 
             this.rotating();
         },
         rotating(index) {
@@ -168,34 +146,32 @@ export default {
             };
             // 可能旋转到的角度
             let arcs = [];
-            
             this.rotateList.forEach((val, ind, arr) => {
                 let _arcs = (2 * ind + 1) * 180 / arr.length;
-                arcs.push(_arcs); 
+                arcs.push(_arcs);
             });
             console.log(arcs);
             var _random = Math.random();
-            var random = Math.ceil(_random * arcs.length) //随机下标
-            var result_index = index || random; // 最终要旋转到哪一块，对应prize_list的下标
-            var rand_circle = 6; // 附加多转几圈，6
-            var during_time = 5; // 默认为1s
+            var random = Math.ceil(_random * arcs.length) // 随机下标
+            var resultIndex = index || random; // 最终要旋转到哪一块，对应prize_list的下标
+            var randCircle = 6; // 附加多转几圈，6
+            var duringTime = 5; // 默认为1s
             this.click_flag = false; // 旋转结束前，不允许再次触发
-            
             // 转动圆盘
-            var rotate_angle =
-            this.start_rotating_degree +
-            rand_circle * 360 -
-            arcs[result_index - 1] -
-            this.start_rotating_degree % 360 + 270; // 这里为计算旋转的角度，考虑第一次旋转后的结果
-            this.rotate_angle = "rotate(" + rotate_angle + "deg)";
+            var rotateAngle =
+            this.startRotatingDegree +
+            randCircle * 360 -
+            arcs[resultIndex - 1] -
+            this.startRotatingDegree % 360 + 270; // 这里为计算旋转的角度，考虑第一次旋转后的结果
+            this.rotateAngle = 'rotate(' + rotateAngle + 'deg)';
             // console.log(arcs,'ss')
-            // console.log(this.rotate_angle,result_index - 1,_random);
-            this.start_rotating_degree = rotate_angle;
+            // console.log(this.rotateAngle,resultIndex - 1,_random);
+            this.startRotatingDegree = rotateAngle;
             setTimeout(() => {
-                alert(this.rotateList[result_index - 1].value);
+                alert(this.rotateList[resultIndex - 1].value);
                 this.click_flag = true;
                 // that.game_over(this.i);
-            }, during_time * 1000 + 1500); // 延时，保证转盘转完
+            }, duringTime * 1000 + 1500); // 延时，保证转盘转完
         }
     }
 }
