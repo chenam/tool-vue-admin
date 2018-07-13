@@ -14,6 +14,7 @@
 							<el-button @click="next" class="el-button-reset next">下一页</el-button>
 						</span>
 					</template>-->
+					<a @click="satmpMsg" class="mBtn">打印</a>
 					<template>
 						<span>
 							<input v-model="value" @input="change" @keyup.enter="fanye" class="mInput" />
@@ -152,7 +153,8 @@ export default{
 			// 当前页数
 			value: '1',
 			// 下载最大数
-			xiazaiMax: this.max
+			xiazaiMax: this.max,
+			popupWin: '',
 		});
 	},
 	watch: {
@@ -206,6 +208,21 @@ export default{
 		// 点击摘录
 		zhailv: function() {
 			// alert('摘录');
+		},
+		satmpMsg() {
+			if (this.popupWin.closed == false) {
+				//  this.$message.error('您有未关闭的窗口！');
+				alert('您有未处理的打印窗口！');
+			}else{
+				this.popupWin = window.open('', '_blank', 'width=800,height=600,z-look=yes');
+				const headstr = '<html><head><title></title><style media="print">.wrapper{page-break-after: always;}div{-webkit-text-size-adjust:none;font-size:12px;font-family:"SimHei",黑体;}.warning{-webkit-text-size-adjust:none;font-size:10px;font-family:"SimHei",黑体;}</style></head><body>';
+				const footstr = "</body></html>";
+				const str = "<div><img src=" + this.url +"><div>";
+				this.popupWin.document.write(headstr + str + footstr);
+				this.popupWin.document.close();
+				this.popupWin.print();
+				this.popupWin.close();
+			}
 		}
 
 	}
