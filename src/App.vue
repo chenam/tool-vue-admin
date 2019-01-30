@@ -68,8 +68,8 @@ export default {
             };
         };
         this.openeds = openeds;
-        console.log(this.$router);
-        console.log(this.$route.path)
+        // console.log(this.$router);
+        // console.log(this.$route.path)
     }
 }
 </script>
